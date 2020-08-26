@@ -3,6 +3,13 @@
     <router-view/>
   </div>
 </template>
+<script>
+export default {
+  beforeCreate: function(){
+    this.$store.dispatch("changeMas");
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

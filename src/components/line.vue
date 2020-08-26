@@ -11,7 +11,16 @@ export default {
     }
   },
   computed: {
-    
+    changeMas(mas){
+      mas.forEach(element => {
+        
+      });
+    }
+  },
+  methods: {
+    changeMas: (mas)=>{
+
+    }
   }
 }
 </script>
