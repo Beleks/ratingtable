@@ -15,7 +15,7 @@ export default new Vuex.Store({
         { idstaff: 1006, depart: "222", fam: "Шилов", first_name: "Корней", last_name: "Максович", points: 3458, day_of_work: 212, eff: 0.90 },
       ],
       lastValue: [
-        { idstaff: 1001, depart: "219", fam: "Белецкий", first_name: "Алексей", last_name: "Вячеславович", points: 2700, day_of_work: 166, eff: 0.65, },
+        { idstaff: 1001, depart: "219", fam: "Белецкий", first_name: "Алексей", last_name: "Вячеславович", points: 2700, day_of_work: 166, eff: 0.79, },
         { idstaff: 1002, depart: "219", fam: "Ермаков", first_name: "Панкрат", last_name: "Яковович", points: 2301, day_of_work: 166, eff: 1.20 },
         { idstaff: 1003, depart: "220", fam: "Богданов", first_name: "Устин", last_name: "Петрович", points: 1523, day_of_work: 205, eff: 0.79 },
         { idstaff: 1004, depart: "220", fam: "Горшков", first_name: "Остап", last_name: "Ростиславович", points: 1870, day_of_work: 102, eff: 1 },
@@ -26,12 +26,29 @@ export default new Vuex.Store({
     new_mas: {
       previousValue: null,
       lastValue: null
+    },
+    sort_eff: {
+      previousValue: null,
+      lastValue: null
     }
+
   },
   mutations: {
     setNewMas(state, obj) {
       state.new_mas.previousValue = obj.previousValue
       state.new_mas.lastValue = obj.lastValue
+    },
+    setSorEff(state, obj) {
+      for (let key in obj) {
+        // Сортировка от большего к меньшему
+        let res = obj[key].sort(function (a, b) { 
+          // Разобрать случай когда эффективность двух работников одинакова
+          return b.eff - a.eff
+        })
+        // Заносим значение в state
+        state.sort_eff[key] = res
+      }
+
     }
   },
   actions: {
@@ -43,7 +60,7 @@ export default new Vuex.Store({
 
       // Вместо state.get_mas поставить переменную которая содержит [] с двумя объектами 
       // !!!! в котором ПЕРВЫЙ ОБЪЕКТ это то что было (неделю, день, и.т.д) надаз 
-      
+
 
       for (let key in state.get_mas) {
         state.get_mas[key].forEach((element, index) => {
@@ -72,10 +89,9 @@ export default new Vuex.Store({
       let previousValue = newM.slice(0, pos)
       let lastValue = newM.slice(pos)
 
-      console.log(previousValue, 'было')
-      console.log(lastValue, 'стало')
 
       commit('setNewMas', { previousValue, lastValue })
+      commit('setSorEff', { previousValue, lastValue })
     }
   },
   modules: {
