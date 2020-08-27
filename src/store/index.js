@@ -31,7 +31,10 @@ export default new Vuex.Store({
       previousValue: null,
       lastValue: null
     },
-    result_mas: []
+    sort_id: {
+      previousValue: null,
+      lastValue: null
+    }
 
   },
   mutations: {
@@ -40,6 +43,8 @@ export default new Vuex.Store({
       state.new_mas.lastValue = obj.lastValue
     },
     setSorEff(state, obj) {
+      // let oneSort
+      // let twoSort
       for (let key in obj) {
         // Сортировка от большего к меньшему
         let res = obj[key].sort(function (a, b) {
@@ -47,12 +52,35 @@ export default new Vuex.Store({
           return b.eff - a.eff
         })
         // Заносим значение в state
-        state.sort_eff[key] = res
+        state.sort_id[key] = res
       }
 
     },
-    setRultsMas(state, obj){
-      
+    setRultsMas(state, obj) {
+
+      for (let key in obj) {
+        // Сортировка от большего к меньшему
+        let res_sort = obj[key].sort(function (a, b) {
+          // Разобрать случай когда эффективность двух работников одинакова
+          return a.idstaff - b.idstaff
+        })
+        // Заносим значение в state
+        state.sort_eff[key] = res_sort
+      }
+      for (let index = 0; index < obj.previousValue.length; index++) {
+        // const element = array[index];
+        let res = Math.floor(obj.lastValue[index].eff * 100) - Math.floor(obj.previousValue[index].eff * 100)
+
+
+        console.log(obj.lastValue[index].name)
+        console.log(obj.lastValue[index].eff)
+        console.log(obj.lastValue[index].eff * 100)
+        console.log(obj.previousValue[index].name)
+        console.log(obj.previousValue[index].eff)
+        console.log(Math.floor(obj.previousValue[index].eff * 100))
+
+        console.log(Math.floor(res))
+      }
     }
   },
   actions: {
@@ -89,13 +117,12 @@ export default new Vuex.Store({
       // Разделяем массив на то что было ДО и ПОСЛЕ с помощью метода .slice()
       // поэтому в начале мы всегда передаем массив с 2 объектами 
       // где ПЕРВЫЙ это данные какие были (неделю, день, и.т.д) надаз 
-
       let previousValue = newM.slice(0, pos)
       let lastValue = newM.slice(pos)
 
-
       commit('setNewMas', { previousValue, lastValue })
       commit('setSorEff', { previousValue, lastValue })
+      commit('setRultsMas', { previousValue, lastValue })
     }
   },
   modules: {
