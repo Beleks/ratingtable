@@ -2,37 +2,35 @@
   <div class="main">
     <table>
       <tr>
-        <td>№</td>
+        <td class="num-td">№</td>
         <td>ФИО</td>
-        <td>Очки</td>
-        <td>Отработанных дней</td>
-        <td>Эффективность</td>
+        <td class="poinst-td">Очки</td>
+        <td class="days-td">Отработанных дней</td>
+        <td align="left">Эффективность</td>
       </tr>
       <tr v-for="(person, index) in people" :key="person.idstaff">
-        <td>{{index}}</td>
-        <td>{{person.name}}</td>
-        <td>{{person.points}}</td>
-        <td>{{person.day_of_work}}</td>
-        <td>{{person.eff}}</td>
+        <td class="num-td">
+          <div
+            class="num"
+            :class="{
+          gold: index === 0,
+          silver: index === 1, 
+          bronze: index === 2}"
+          >{{index + 1}}</div>
+        </td>
+        <td class="FIO-td">
+          <div class="FIO">{{person.name}}</div>
+        </td>
+        <td class="poinst-td">
+          <div>{{person.points}}</div>
+        </td>
+        <td class="days-td">
+          <div>{{person.day_of_work}}</div>
+        </td>
+        <td class="eff-td">
+          <div class="eff">{{person.eff}}</div>
+        </td>
       </tr>
-      <!-- <div class="first-line line">
-        <div class="num"></div>
-        <div class="FIO"></div>
-        <div class="points"></div>
-        <div class="days"></div>
-        <div class="eff"></div>
-      </div>-->
-      <!-- <line-table
-        v-for="(person, index) in people"
-        :key="person.idstaff"
-        :number="index + 1"
-        :name="person.name"
-        :points="person.points"
-        :eff="person.eff"
-        :depart="person.depart"
-        :change="person.changeEff"
-        class="line"
-      ></line-table>-->
     </table>
   </div>
   <!-- <div class="footer">
@@ -82,11 +80,13 @@ export default {
   justify-items: center;
   justify-content: center;
 }
-.table {
-  display: flex;
-  flex-direction: column;
+table {
   /* max-width: 910px; */
-  margin: 1em auto;
+  width: 100%;
+  margin: 1em 2em;
+}
+td {
+  padding: 0.3em 0;
 }
 .first-line {
   display: flex;
@@ -98,29 +98,62 @@ export default {
 .first-line > div:not(:last-child) {
   border-right: 1px solid black;
 }
+/* ================ */
+.gold {
+  background: linear-gradient(to bottom right, #fff47a, #dfba01, #ffeb38);
+  /* background-color: #ffd700; */
+}
+.silver {
+  background: linear-gradient(to bottom right, #eaf8ff, #bdcbd6, #ccdae5);
+}
+.bronze {
+  /* background: linear-gradient(to bottom right, #d19585 #996356, #996356); */
+  background: linear-gradient(to bottom right, #b48073, #875346, #a57164);
+}
+/* ================ */
+
+.num-td {
+  display: flex;
+  justify-content: center;
+}
 .num {
-  flex-grow: 0.5;
-  flex-shrink: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+}
+.FIO-td {
+  text-align: left;
+  min-width: 200px;
 }
 .FIO {
-  flex-grow: 4;
-  flex-shrink: 1;
+  margin-left: 0.3em;
 }
-.points {
-  flex-grow: 1;
-  flex-shrink: 1;
-  max-width: 180px;
+.points-td {
+  /* width: 200px; */
+  /* min-width: 200px; */
+}
+.points{
+
+}
+.eff-td {
+  text-align: left;
+  /* min-width: 250px; */
 }
 .eff {
-  flex-grow: 1;
-  flex-shrink: 1;
-  max-width: 180px;
+  margin-left: 3em;
+}
+.days-td {
+  /* min-width: 250px; */
 }
 .days {
   flex-grow: 1;
   flex-shrink: 1;
-  max-width: 180px;
+  /* max-width: 180px; */
 }
+/* ===================================== */
 .line {
   border: 1px solid black;
 }
