@@ -7,20 +7,20 @@ export default new Vuex.Store({
   state: {
     get_mas: {
       previousValue: [
-        { idstaff: 1001, depart: "219", fam: "Белецкий", first_name: "Алексей", last_name: "Вячеславович", points: 2878, day_of_work: 160, eff: 0.86, },
-        { idstaff: 1002, depart: "219", fam: "Ермаков", first_name: "Панкрат", last_name: "Яковович", points: 2279, day_of_work: 163, eff: 1.04 },
-        { idstaff: 1003, depart: "220", fam: "Богданов", first_name: "Устин", last_name: "Петрович", points: 1840, day_of_work: 200, eff: 0.73 },
-        { idstaff: 1004, depart: "220", fam: "Горшков", first_name: "Остап", last_name: "Ростиславович", points: 1818, day_of_work: 96, eff: 0.96 },
-        { idstaff: 1005, depart: "221", fam: "Моисеев", first_name: "Осип", last_name: "Вадимович", points: 710, day_of_work: 188, eff: 1.10 },
-        { idstaff: 1006, depart: "222", fam: "Шилов", first_name: "Корней", last_name: "Максович", points: 3458, day_of_work: 212, eff: 0.90 },
+        { idstaff: 1001, depart: "219", fam: "Белецкий", first_name: "Алексей", patronymic: "Вячеславович", points: 2878, day_of_work: 160, eff: 0.86, },
+        { idstaff: 1002, depart: "219", fam: "Ермаков", first_name: "Панкрат", patronymic: "Яковович", points: 2279, day_of_work: 163, eff: 1.04 },
+        { idstaff: 1003, depart: "220", fam: "Богданов", first_name: "Устин", patronymic: "Петрович", points: 1840, day_of_work: 200, eff: 0.73 },
+        { idstaff: 1004, depart: "220", fam: "Горшков", first_name: "Остап", patronymic: "Ростиславович", points: 1818, day_of_work: 96, eff: 0.96 },
+        { idstaff: 1005, depart: "221", fam: "Моисеев", first_name: "Осип", patronymic: "Вадимович", points: 710, day_of_work: 188, eff: 1.10 },
+        { idstaff: 1006, depart: "222", fam: "Шилов", first_name: "Корней", patronymic: "Максович", points: 3458, day_of_work: 212, eff: 0.90 },
       ],
       lastValue: [
-        { idstaff: 1001, depart: "219", fam: "Белецкий", first_name: "Алексей", last_name: "Вячеславович", points: 2700, day_of_work: 166, eff: 0.79, },
-        { idstaff: 1002, depart: "219", fam: "Ермаков", first_name: "Панкрат", last_name: "Яковович", points: 2301, day_of_work: 166, eff: 1.20 },
-        { idstaff: 1003, depart: "220", fam: "Богданов", first_name: "Устин", last_name: "Петрович", points: 1523, day_of_work: 205, eff: 0.79 },
-        { idstaff: 1004, depart: "220", fam: "Горшков", first_name: "Остап", last_name: "Ростиславович", points: 1870, day_of_work: 102, eff: 1 },
-        { idstaff: 1005, depart: "221", fam: "Моисеев", first_name: "Осип", last_name: "Вадимович", points: 1142, day_of_work: 196, eff: 1.04 },
-        { idstaff: 1006, depart: "222", fam: "Шилов", first_name: "Корней", last_name: "Максович", points: 2995, day_of_work: 218, eff: 0.95 },
+        { idstaff: 1001, depart: "219", fam: "Белецкий", first_name: "Алексей", patronymic: "Вячеславович", points: 2700, day_of_work: 166, eff: 0.79, },
+        { idstaff: 1002, depart: "219", fam: "Ермаков", first_name: "Панкрат", patronymic: "Яковович", points: 2301, day_of_work: 166, eff: 1.20 },
+        { idstaff: 1003, depart: "220", fam: "Богданов", first_name: "Устин", patronymic: "Петрович", points: 1523, day_of_work: 205, eff: 0.79 },
+        { idstaff: 1004, depart: "220", fam: "Горшков", first_name: "Остап", patronymic: "Ростиславович", points: 1870, day_of_work: 102, eff: 1 },
+        { idstaff: 1005, depart: "221", fam: "Моисеев", first_name: "Осип", patronymic: "Вадимович", points: 1142, day_of_work: 196, eff: 1.04 },
+        { idstaff: 1006, depart: "222", fam: "Шилов", first_name: "Корней", patronymic: "Максович", points: 2995, day_of_work: 218, eff: 0.95 },
       ]
     },
     new_mas: {
@@ -73,7 +73,7 @@ export default new Vuex.Store({
           // В каком виде записывать ? Белецкий А.В или Белецкий Алексей Вячеславович
 
           obj_el.idstaff = element.idstaff
-          obj_el.name = element.fam + " " + element.first_name + " " + element.last_name // Объединяем ФИО
+          obj_el.name = element.fam + " " + element.first_name + " " + element.patronymic // Объединяем ФИО
           obj_el.depart = element.depart
           obj_el.day_of_work = element.day_of_work
           obj_el.points = element.points
