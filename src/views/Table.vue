@@ -1,15 +1,28 @@
 <template>
-  <div>
-    Таблица
-    <div class="table">
-      <div class="first-line line">
-        <div>№</div>
-        <div>ФИО</div>
-        <div>Очки</div>
-        <div>Эффективность</div>
-        <div></div>
-      </div>
-      <line-table
+  <div class="main">
+    <table>
+      <tr>
+        <td>№</td>
+        <td>ФИО</td>
+        <td>Очки</td>
+        <td>Отработанных дней</td>
+        <td>Эффективность</td>
+      </tr>
+      <tr v-for="(person, index) in people" :key="person.idstaff">
+        <td>{{index}}</td>
+        <td>{{person.name}}</td>
+        <td>{{person.points}}</td>
+        <td>{{person.day_of_work}}</td>
+        <td>{{person.eff}}</td>
+      </tr>
+      <!-- <div class="first-line line">
+        <div class="num"></div>
+        <div class="FIO"></div>
+        <div class="points"></div>
+        <div class="days"></div>
+        <div class="eff"></div>
+      </div>-->
+      <!-- <line-table
         v-for="(person, index) in people"
         :key="person.idstaff"
         :number="index + 1"
@@ -17,10 +30,12 @@
         :points="person.points"
         :eff="person.eff"
         :depart="person.depart"
+        :change="person.changeEff"
         class="line"
-      ></line-table>
-    </div>
-    <div class="footer">
+      ></line-table>-->
+    </table>
+  </div>
+  <!-- <div class="footer">
       <div class="block">
         <div class="one"></div>
         <div>- depart "219"</div>
@@ -38,7 +53,7 @@
         <div>- depart "222"</div>
       </div>
     </div>
-  </div>
+  </div>-->
 </template>
 <script>
 import LineTable from "@/components/LineTable.vue";
@@ -49,7 +64,7 @@ export default {
   },
   computed: {
     people() {
-      return this.$store.state.sort_id.lastValue;
+      return this.$store.state.finalMas;
     },
   },
   components: {
@@ -58,37 +73,59 @@ export default {
 };
 </script>
 <style lang="css" scoped>
+.main {
+  border-radius: 10px;
+  background-color: white;
+  margin: 1em 2em;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+}
 .table {
-  margin: 0.5em;
-  display: grid;
-  grid-template-rows: 1fr;
-  max-width: 750px;
-  margin: auto;
-  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  /* max-width: 910px; */
+  margin: 1em auto;
 }
 .first-line {
-  display: grid;
-  grid-template-columns:
-    minmax(30px, 150px) minmax(330px, 400px) minmax(100px, 150px)
-    150px minmax(100px, 1fr);
+  display: flex;
 }
 .first-line > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.2em;
-  height: 45px;
+  padding: 0.2em 0;
+  /* border-right: 1px solid black; */
 }
-.first-line > div:not(:first-child) {
-  border-left: 1px solid black;
+.first-line > div:not(:last-child) {
+  border-right: 1px solid black;
+}
+.num {
+  flex-grow: 0.5;
+  flex-shrink: 1;
+}
+.FIO {
+  flex-grow: 4;
+  flex-shrink: 1;
+}
+.points {
+  flex-grow: 1;
+  flex-shrink: 1;
+  max-width: 180px;
+}
+.eff {
+  flex-grow: 1;
+  flex-shrink: 1;
+  max-width: 180px;
+}
+.days {
+  flex-grow: 1;
+  flex-shrink: 1;
+  max-width: 180px;
 }
 .line {
-  height: 45px;
   border: 1px solid black;
-  border-bottom: none;
 }
-.line:last-child {
-  border-bottom: 1px solid black;
+.line:not(:first-child) {
+  border-top: none;
 }
 
 /*================*/

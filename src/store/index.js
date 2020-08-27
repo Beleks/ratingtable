@@ -35,7 +35,8 @@ export default new Vuex.Store({
     sort_id: {
       previousValue: null,
       lastValue: null
-    }
+    },
+    finalMas: null
 
   },
   mutations: {
@@ -43,21 +44,21 @@ export default new Vuex.Store({
       state.new_mas.previousValue = obj.previousValue
       state.new_mas.lastValue = obj.lastValue
     },
-    setSorEff(state, obj) {
-      // let oneSort
-      // let twoSort
-      for (let key in obj) {
-        // Сортировка от большего к меньшему
-        let res = obj[key].slice()
-        res.sort((a, b) => {
-          // Разобрать случай когда эффективность двух работников одинакова
-          return b.eff - a.eff
-        })
-        // Заносим значение в state
-        state.sort_eff[key] = res
-      }
+    // setSorEff(state, obj) {
+    //   // let oneSort
+    //   // let twoSort
+    //   for (let key in obj) {
+    //     // Сортировка от большего к меньшему
+    //     let res = obj[key].slice()
+    //     res.sort((a, b) => {
+    //       // Разобрать случай когда эффективность двух работников одинакова
+    //       return b.eff - a.eff
+    //     })
+    //     // Заносим значение в state
+    //     state.sort_eff[key] = res
+    //   }
       
-    },
+    // },
     setRultsMas(state, obj) {
 
       for (let key in obj) {
@@ -69,21 +70,41 @@ export default new Vuex.Store({
         // Заносим значение в state
         state.sort_id[key] = res_sort_id
       }
+
+      let finalMas = [] 
+
+
+      for (let index = 0; index < obj.previousValue.length; index++) {
+        // const element = array[index];
+        let difference = Math.floor(obj.lastValue[index].eff * 100) - Math.floor(obj.previousValue[index].eff * 100)
+        
+        finalMas = obj.lastValue.slice()
+        finalMas[index].changeEff = difference
+        console.log(finalMas[index])
+        // finalMas.push(obj.previousValue[index])
+
+        // console.log(obj.lastValue[index].name)
+        // console.log(obj.lastValue[index].eff)
+        // console.log(obj.lastValue[index].eff * 100)
+        // console.log(obj.previousValue[index].name)
+        // console.log(obj.previousValue[index].eff)
+        // console.log(Math.floor(obj.previousValue[index].eff * 100))
+
+        console.log(Math.floor(difference)/ 100)
+        
+      }
+      console.log(finalMas)
+      for (let key in finalMas) {
+        // Сортировка от большего к меньшему
+        // let res = obj[key].slice()
+        finalMas.sort((a, b) => {
+          // Разобрать случай когда эффективность двух работников одинакова
+          return b.eff - a.eff
+        })
+        // Заносим значение в state
+        state.finalMas = finalMas
+      }
       
-      // for (let index = 0; index < obj.previousValue.length; index++) {
-      //   // const element = array[index];
-      //   let difference = Math.floor(obj.lastValue[index].eff * 100) - Math.floor(obj.previousValue[index].eff * 100)
-
-
-      //   console.log(obj.lastValue[index].name)
-      //   console.log(obj.lastValue[index].eff)
-      //   console.log(obj.lastValue[index].eff * 100)
-      //   console.log(obj.previousValue[index].name)
-      //   console.log(obj.previousValue[index].eff)
-      //   console.log(Math.floor(obj.previousValue[index].eff * 100))
-
-      //   console.log(Math.floor(difference))
-      // }
     }
   },
   actions: {
@@ -124,7 +145,7 @@ export default new Vuex.Store({
       let lastValue = newM.slice(pos)
 
       commit('setNewMas', { previousValue, lastValue })
-      commit('setSorEff', { previousValue, lastValue })
+      // commit('setSorEff', { previousValue, lastValue })
       commit('setRultsMas', { previousValue, lastValue })
     }
   },
