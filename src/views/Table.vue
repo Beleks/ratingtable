@@ -6,7 +6,7 @@
         <td>ФИО</td>
         <td class="poinst-td">Очки</td>
         <td class="days-td">Отработанных дней</td>
-        <td align="left">Эффективность</td>
+        <td>Эффективность</td>
       </tr>
       <tr v-for="(person, index) in people" :key="person.idstaff">
         <td class="num-td">
@@ -28,7 +28,18 @@
           <div>{{person.day_of_work}}</div>
         </td>
         <td class="eff-td">
-          <div class="eff">{{person.eff}}</div>
+          <div class="eff-main">
+            <div class="space">
+              <div class="eff">
+                <div class="eff-left">{{person.eff}}</div>
+              </div>
+              <div
+                class="change-eff"
+                :class="{green: person.changeEff > 0,
+              red: person.changeEff < 0}"
+              >({{person.changeEff}})</div>
+            </div>
+          </div>
         </td>
       </tr>
     </table>
@@ -83,7 +94,7 @@ export default {
 table {
   /* max-width: 910px; */
   width: 100%;
-  margin: 1em 2em;
+  margin: 1em 0.5em;
 }
 td {
   padding: 0.3em 0;
@@ -135,23 +146,43 @@ td {
   /* width: 200px; */
   /* min-width: 200px; */
 }
-.points{
-
+.points {
 }
 .eff-td {
-  text-align: left;
-  /* min-width: 250px; */
+  max-width: 200px;
+}
+.eff-main {
+  display: flex;
+  justify-content: center;
+  /* margin-left: 1em; */
+  /* padding-left: 3em; */
+}
+.space{
+  display: flex;
+  width: 100px;
+  justify-content: space-between;
 }
 .eff {
-  margin-left: 3em;
+  display: flex;
+  /* min-width: 80px; */
+  /* justify-content: left; */
 }
+.eff-left {
+  left: 0;
+}
+.change-eff {
+  margin-left: 1em;
+}
+
+.green {
+  color: rgb(66, 184, 131);
+}
+.red {
+  color: rgb(177, 32, 56);
+}
+
 .days-td {
   /* min-width: 250px; */
-}
-.days {
-  flex-grow: 1;
-  flex-shrink: 1;
-  /* max-width: 180px; */
 }
 /* ===================================== */
 .line {
@@ -162,7 +193,7 @@ td {
 }
 
 /*================*/
-.footer {
+/* .footer {
   margin: 1em;
   display: flex;
   flex-direction: column;
@@ -198,5 +229,5 @@ td {
   height: 10px;
   border-radius: 5px;
   background-color: #00b894;
-}
+} */
 </style>

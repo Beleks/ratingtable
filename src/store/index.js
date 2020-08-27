@@ -79,8 +79,9 @@ export default new Vuex.Store({
         let difference = Math.floor(obj.lastValue[index].eff * 100) - Math.floor(obj.previousValue[index].eff * 100)
         
         finalMas = obj.lastValue.slice()
-        finalMas[index].changeEff = difference
-        console.log(finalMas[index])
+        // console.log(difference)
+        finalMas[index].changeEff = difference / 100
+        // console.log(finalMas[index])
         // finalMas.push(obj.previousValue[index])
 
         // console.log(obj.lastValue[index].name)
@@ -90,7 +91,7 @@ export default new Vuex.Store({
         // console.log(obj.previousValue[index].eff)
         // console.log(Math.floor(obj.previousValue[index].eff * 100))
 
-        console.log(Math.floor(difference)/ 100)
+        // console.log(Math.floor(difference)/ 100)
         
       }
       console.log(finalMas)
