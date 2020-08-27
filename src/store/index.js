@@ -30,7 +30,8 @@ export default new Vuex.Store({
     sort_eff: {
       previousValue: null,
       lastValue: null
-    }
+    },
+    result_mas: []
 
   },
   mutations: {
@@ -41,7 +42,7 @@ export default new Vuex.Store({
     setSorEff(state, obj) {
       for (let key in obj) {
         // Сортировка от большего к меньшему
-        let res = obj[key].sort(function (a, b) { 
+        let res = obj[key].sort(function (a, b) {
           // Разобрать случай когда эффективность двух работников одинакова
           return b.eff - a.eff
         })
@@ -49,6 +50,9 @@ export default new Vuex.Store({
         state.sort_eff[key] = res
       }
 
+    },
+    setRultsMas(state, obj){
+      
     }
   },
   actions: {

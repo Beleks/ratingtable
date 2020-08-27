@@ -34,7 +34,7 @@
         <div> - depart "221"</div>
       </div>
       <div class="block">
-        <div class="for"></div>
+        <div class="four"></div>
         <div> - depart "222"</div>
       </div>
     </div>
@@ -123,7 +123,7 @@ export default {
     border-radius: 5px;
     background-color: #d63031;
   }
-  .for {
+  .four {
     width: 50px;
     height: 10px;
     border-radius: 5px;

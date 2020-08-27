@@ -8,7 +8,7 @@
         one: depart === '219',
         two: depart === '220',
         three: depart === '221',
-        for: depart === '222',
+        four: depart === '222',
       }"
       ></div>
       <div class="name-block">
@@ -82,7 +82,7 @@ export default {
 .three {
   background-color: #d63031;
 }
-.for {
+.four {
   background-color: #00b894;
 }
 </style>
