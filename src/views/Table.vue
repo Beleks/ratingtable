@@ -35,7 +35,7 @@
               </div>
               <div
                 class="change-eff"
-                :class="{green: person.changeEff > 0,
+                :class="{green: person.changeEff >= 0,
               red: person.changeEff < 0}"
               >({{person.changeEff}})</div>
             </div>
