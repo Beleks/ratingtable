@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+// import { slice } from 'core-js/fn/array'
 
 Vue.use(Vuex)
 
@@ -47,40 +48,42 @@ export default new Vuex.Store({
       // let twoSort
       for (let key in obj) {
         // Сортировка от большего к меньшему
-        let res = obj[key].sort(function (a, b) {
+        let res = obj[key].slice()
+        res.sort((a, b) => {
           // Разобрать случай когда эффективность двух работников одинакова
           return b.eff - a.eff
         })
         // Заносим значение в state
-        state.sort_id[key] = res
+        state.sort_eff[key] = res
       }
-
+      
     },
     setRultsMas(state, obj) {
 
       for (let key in obj) {
         // Сортировка от большего к меньшему
-        let res_sort = obj[key].sort(function (a, b) {
-          // Разобрать случай когда эффективность двух работников одинакова
+        let res_sort_id = obj[key].slice()
+        res_sort_id.sort((a, b) => {
           return a.idstaff - b.idstaff
         })
         // Заносим значение в state
-        state.sort_eff[key] = res_sort
+        state.sort_id[key] = res_sort_id
       }
-      for (let index = 0; index < obj.previousValue.length; index++) {
-        // const element = array[index];
-        let res = Math.floor(obj.lastValue[index].eff * 100) - Math.floor(obj.previousValue[index].eff * 100)
+      
+      // for (let index = 0; index < obj.previousValue.length; index++) {
+      //   // const element = array[index];
+      //   let difference = Math.floor(obj.lastValue[index].eff * 100) - Math.floor(obj.previousValue[index].eff * 100)
 
 
-        console.log(obj.lastValue[index].name)
-        console.log(obj.lastValue[index].eff)
-        console.log(obj.lastValue[index].eff * 100)
-        console.log(obj.previousValue[index].name)
-        console.log(obj.previousValue[index].eff)
-        console.log(Math.floor(obj.previousValue[index].eff * 100))
+      //   console.log(obj.lastValue[index].name)
+      //   console.log(obj.lastValue[index].eff)
+      //   console.log(obj.lastValue[index].eff * 100)
+      //   console.log(obj.previousValue[index].name)
+      //   console.log(obj.previousValue[index].eff)
+      //   console.log(Math.floor(obj.previousValue[index].eff * 100))
 
-        console.log(Math.floor(res))
-      }
+      //   console.log(Math.floor(difference))
+      // }
     }
   },
   actions: {

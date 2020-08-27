@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     people() {
-      return this.$store.state.new_mas.lastValue;
+      return this.$store.state.sort_id.lastValue;
     },
   },
   components: {
